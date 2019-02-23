@@ -16,6 +16,6 @@ class Shops extends Model
     }
 
     public function image(){
-        return $this->img ? Storage::url($this->img) : '/image/head.jpg';
+        return $this->shop_img ? Storage::url($this->shop_img) : '/image/head.jpg';
     }
 }

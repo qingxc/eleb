@@ -26,8 +26,8 @@
         </div>
         <div class="form-group">
             <label>状态:</label>
-            <input   type="radio"   value="1"     name="statues"   />启用
-            <input   type="radio"   value="0"    name="statues"   checked="checked"/>禁用
+            <input   type="radio"   value='1'     name="statues"   checked="checked"/>启用
+            <input   type="radio"   value='0'     name="statues"   />禁用
         </div>
         {{csrf_field()}}
         {{ method_field('patch') }}

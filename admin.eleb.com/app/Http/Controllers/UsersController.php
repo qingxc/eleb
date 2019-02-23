@@ -17,8 +17,9 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         //
+        $shops = Shops::all();
         $users=Users::all();
-        return view('users.index',compact('users'));
+        return view('users.index',compact('users','shops'));
     }
 
     /**
@@ -26,9 +27,24 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Users $user,Request $request)
     {
         //
+        $cz = mt_rand(1,999999).'cz';
+        //验证通过，保存数据
+        $a=$user->update([
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'password'=>Hash::make(mt_rand(1,999999).'cz'),
+            'shop_id'=>$user->shop_id,
+            'statues'=>0,
+        ]);
+        //dd($a->statues);
+
+        //设置操作提示信息
+        $request->session()->flash('success',"用户密码重置成功,请记住新密码"."$cz");
+        return redirect()->route('users.index');
+
     }
 
     /**
@@ -48,10 +64,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Users $user,Request $request)
     {
-
-
+        return redirect()->route('users.index');
     }
 
     /**
@@ -89,17 +104,17 @@ class UsersController extends Controller
         ]);
 
         //验证通过，保存数据
-        $user->update([
+        $a=$user->update([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'shop_id'=>$request->shop_id,
-            'statues'=>$request->statues,
+            'statues'=>1,
         ]);
-
+        //dd($a->statues);
 
         //设置操作提示信息
-        $request->session()->flash('success','用户修改成功');
+        $request->session()->flash('success','用户审核成功');
         return redirect()->route('users.index');
 
     }
@@ -114,7 +129,7 @@ class UsersController extends Controller
     {
         //
         $user->delete();
-        session()->flash('success','分类删除成功');
-        return redirect()->route('shopcategory.index');
+        session()->flash('success','分类成功');
+        return redirect()->route('users.index');
     }
 }

@@ -6,6 +6,7 @@ use App\Models\ShopCategory;
 use App\Models\Shops;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ShopsController extends Controller
@@ -104,6 +105,7 @@ class ShopsController extends Controller
 
 
 
+        DB::beginTransaction();
         //验证通过，保存商家信息
         $a=Shops::create([
             //
@@ -127,7 +129,7 @@ class ShopsController extends Controller
         $id=$a->id;
         //dd($request->statues);
         //验证通过，保存商家账号
-        Users::create([
+        $b=Users::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
@@ -135,9 +137,15 @@ class ShopsController extends Controller
             'statues'=>$request->statues,
 
         ]);
+        if($a&&$b){
+            DB::commit();
+            return redirect()->route('shops.index')->with('success','注册成功');
+        }else{
+            DB::rollback();
+            return redirect()->route('shops.index')->with('success','注册失败');
+        }
 
 
-        return redirect()->route('shops.index')->with('success','注册成功');
 
 
 
@@ -160,9 +168,11 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Shops $shop)
     {
         //
+        $shops = Shops::all();
+        return view('shops.edit',compact('shops','shop'));
     }
 
     /**
@@ -172,9 +182,71 @@ class ShopsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Shops $shop,Request $request)
     {
         //
+
+        $this->validate($request,[
+            //商家信息
+            'shop_category_id'=>'required',
+            'shop_name'=>'required',
+            'shop_img'=>'required|image|max:2048',
+            'brand'=>'required',
+            'on_time'=>'required',
+            'fengniao'=>'required',
+            'bao'=>'required',
+            'piao'=>'required',
+            'zhun'=>'required',
+            'start_send'=>'required',
+            'send_cost'=>'required',
+            'notice'=>'required',
+            'discount'=>'required',
+        ],[
+            'shop_category_id.required'=>'店铺分类ID不能为空',
+            'shop_name.required'=>'名字不能为空',
+            'shop_img.required'=>'店铺图片不能为空',
+            'shop_img.image'=>'图片格式不正确',
+            'shop_img.max'=>'图片大小不能超过100K',
+            'on_time.required'=>'名字不能为空',
+            'brand.required'=>'名字不能为空',
+            'fengniao.required'=>'名字不能为空',
+            'start_send.required'=>'起送金额不能为空',
+            'send_cost.required'=>'配送费不能为空',
+            'notice.required'=>'店公告不能为空',
+            'discount.required'=>'优惠信息不能为空',
+        ]);
+
+
+        $img = $request->file('shop_img');
+        //保存文件
+        $path = $img->store('public/shops');
+
+
+        //验证通过，保存数据
+        $shop->update([
+            'shop_category_id'=>$request->shop_category_id,
+            'shop_name'=>$request->shop_name,
+            'shop_img'=>$path,
+            'brand'=>$request->brand,
+            'on_time'=>$request->on_time,
+            'fengniao'=>$request->fengniao,
+            'bao'=>$request->bao,
+            'piao'=>$request->piao,
+            'zhun'=>$request->zhun,
+            'shop_rating'=>$request->shop_rating,
+            'start_send'=>$request->start_send,
+            'send_cost'=>$request->send_cost,
+            'notice'=>$request->notice,
+            'discount'=>$request->discount,
+            'name'=>$request->name,
+            'status'=>$request->status
+        ]);
+
+
+        //设置操作提示信息
+        $request->session()->flash('success','用户审核成功');
+        return redirect()->route('users.index');
+
     }
 
     /**

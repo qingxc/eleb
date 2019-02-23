@@ -39,12 +39,12 @@
                 <td>{{ $shop->notice }}</td>
                 <td>{{ $shop->discount }}</td>
                 <td>{{ $shop->status }}</td>
-                <td><a href="{{ route('shops.show',[$shop]) }}" class="btn btn-info">查看</a>
-                    <a href="{{ route('shops.edit',[$shop]) }}" class="btn btn-warning">编辑</a>
+                <td><a href="{{ route('shops.show',[$shop]) }}" class="btn btn-info">查看信息</a>
+                    <a href="{{ route('shops.edit',[$shop]) }}" class="btn btn-warning">审核编辑</a>
                     <form style="display: inline" method="post" action="{{ route('shops.destroy',[$shop]) }}">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
-                        <button type="submit" class="btn btn-danger">删除</button>
+                        <button type="submit" class="btn btn-danger">删除店铺</button>
                     </form>
                 </td>
             </tr>

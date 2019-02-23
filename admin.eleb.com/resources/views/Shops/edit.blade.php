@@ -1,22 +1,31 @@
-@extends('./layout/app')
+@extends('layout.app')
 @section('content')
-    @include('layout._tips')
     @include('layout._errors')
-    <form method="post" action="{{ route('shops.store') }}" enctype="multipart/form-data">
-        <h1>店铺注册:</h1>
+    <form action="{{route('shops.update',[$shop])}}" method="post" enctype="multipart/form-data">
+<!--        --><?php //echo $users;exit;?>
+        <h1>店铺信息修改:</h1>
+        {{--<div class="form-group">--}}
+            {{--<label>名称:</label>--}}
+            {{--<input type="text" name="name" class="form-control" value="{{ old('name')??$shop->name }}">--}}
+        {{--</div>--}}
+
+        {{--<div class="form-group">--}}
+            {{--<label>店铺分类:</label>--}}
+            {{--<select name="shop_category_id" class="form-control">--}}
+                {{--@foreach($shopcategory as $shopcategory2)--}}
+                    {{--<option value="{{ $shopcategory2->id }}"--}}
+                            {{--@if(old('shop_category_id')==$shopcategory2->id) selected @endif--}}
+                    {{-->{{ $shopcategory2->name }}</option>--}}
+                {{--@endforeach--}}
+            {{--</select>--}}
+        {{--</div>--}}
         <div class="form-group">
-            <label>店铺分类:</label>
-            <select name="shop_category_id" class="form-control">
-                @foreach($shopcategory as $shopcategory2)
-                    <option value="{{ $shopcategory2->id }}"
-                            @if(old('shop_category_id')==$shopcategory2->id) selected @endif
-                    >{{ $shopcategory2->name }}</option>
-                @endforeach
-            </select>
+            <label>店铺id:</label>
+            <input type="text" name="shop_category_id" class="form-control" value="{{ old('shop_name')??$shop->shop_category_id }}">
         </div>
         <div class="form-group">
             <label>名称:</label>
-            <input type="text" name="shop_name" class="form-control" value="{{ old('shop_name') }}">
+            <input type="text" name="shop_name" class="form-control" value="{{ old('shop_name')??$shop->shop_name }}">
         </div>
         <div class="form-group">
             <label>	店铺图片:</label>
@@ -24,7 +33,7 @@
         </div>
         <div class="form-group">
             <label>评分:</label>
-            <input type="text" name="shop_rating" class="form-control" value="{{ old('shop_rating') }}">
+            <input type="text" name="shop_rating" class="form-control" value="{{ old('shop_rating')??$shop->shop_rating }}">
         </div>
         <div class="form-group">
             <label>是否是品牌:</label>
@@ -58,19 +67,19 @@
         </div>
         <div class="form-group">
             <label>起送金额:</label>
-            <input type="text" name="start_send" class="form-control" value="{{ old('start_send') }}">
+            <input type="text" name="start_send" class="form-control" value="{{ old('start_send')??$shop->start_send }}">
         </div>
         <div class="form-group">
             <label>配送费:</label>
-            <input type="text" name="send_cost" class="form-control" value="{{ old('send_cost') }}">
+            <input type="text" name="send_cost" class="form-control" value="{{ old('send_cost')??$shop->send_cost }}">
         </div>
         <div class="form-group">
             <label>店公告:</label>
-            <input type="text" name="notice" class="form-control" value="{{ old('notice') }}">
+            <input type="text" name="notice" class="form-control" value="{{ old('notice')??$shop->notice }}">
         </div>
         <div class="form-group">
             <label>优惠信息:</label>
-            <input type="text" name="discount" class="form-control" value="{{ old('discount') }}">
+            <input type="text" name="discount" class="form-control" value="{{ old('discount')??$shop->discount }}">
         </div>
         <div class="form-group">
             <label>	状态:</label>
@@ -78,28 +87,8 @@
             <input   type="radio"   value=0    name="status"   >待审核
             <input   type="radio"   value=-1    name="status"   >禁用
         </div>
-
-
-        <h1>账号注册:</h1>
-        <div class="form-group">
-            <label>名称:</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-        </div>
-        <div class="form-group">
-            <label>邮箱:</label>
-            <input type="text" name="email" class="form-control" value="{{ old('email') }}">
-        </div>
-        <div class="form-group">
-            <label>密码:</label>
-            <input type="password" name="password" class="form-control" value="{{ old('password') }}">
-        </div>
-        <div class="form-group">
-            <label>状态:</label>
-            <input   type="radio"   value=1  class=""   name="statues"   />启用
-            <input   type="radio"   value=0    name="statues"   checked="checked">禁用
-        </div>
-
-        {{ csrf_field() }}
-        <button type="submit" class="btn btn-primary">提交</button>
+        {{csrf_field()}}
+        {{ method_field('patch') }}
+        <button type="submit" class="btn btn-default btn-primary">修改</button>
     </form>
-@stop
+@stop();

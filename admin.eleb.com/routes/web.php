@@ -16,11 +16,21 @@ Route::get('/', function () {
 });
 //商家账号资源路由
 Route::resource('users','UsersController');
+
+//商家账号资源路由
+Route::resource('admins','AdminsController');
+
 //商家信息资源路由
 Route::resource('shops','ShopsController');
+
 //商家分类资源路由
 Route::resource('shopcategory','ShopCategoryController');
 
+
+//定义登录路由
+Route::get('/login','LoginController@index')->name('login');
+Route::post('/login','LoginController@login')->name('login');
+Route::get('/logout','LoginController@logout')->name('logout');
 
 
 
