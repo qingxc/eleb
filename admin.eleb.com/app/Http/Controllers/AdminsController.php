@@ -55,19 +55,19 @@ class AdminsController extends Controller
         //验证通过，保存数据
         //var_dump($request->password);
 
-        $admin = new Admins();
-        $admin->name = $request->name;
-        //dd($request->psaaword);
-        $admin->password = Hash::make($request->password);
-
-        $admin->email = $request->email;
-        $admin->save();
+//        $admin = new Admins();
+//        $admin->name = $request->name;
+//        //dd($request->psaaword);
+//        $admin->password = Hash::make($request->password);
+//
+//        $admin->email = $request->email;
+//        $admin->save();
         //dd('ok');
-//        Admins::create([
-//            'name'=>$request->name,
-//            'password'=>Hash::make($request->psaaword),
-//            'email'=>$request->email,
-//        ]);
+        Admins::create([
+            'name'=>$request->name,
+            'password'=>Hash::make($request->psaaword),
+            'email'=>$request->email,
+        ]);
         return redirect()->route('admins.index')->with('success','管理员添加成功');
     }
 

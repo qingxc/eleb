@@ -26,6 +26,8 @@ Route::resource('shops','ShopsController');
 //商家分类资源路由
 Route::resource('shopcategory','ShopCategoryController');
 
+//平台活动资源路由
+Route::resource('activity','ActivityController');
 
 //定义登录路由
 Route::get('/login','LoginController@index')->name('login');

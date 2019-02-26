@@ -17,6 +17,20 @@ Route::get('/', function () {
 //商家账号资源路由
 Route::resource('users','UsersController');
 
+//商家菜品分类资源路由
+Route::resource('menucategory','menucategoryController');
+
+//商家菜品资源路由
+Route::resource('menus','menusController');
+
+////平台活动资源路由
+//Route::resource('activity','ActivityController');
+
+
+//活动
+Route::get('/login.shows/{activity}','LoginController@shows')->name('login.shows');
+Route::get('/login.show','LoginController@show')->name('login.show');
+
 //定义登录路由
 Route::get('/login','LoginController@index')->name('login');
 Route::post('/login','LoginController@login')->name('login');

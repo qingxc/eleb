@@ -41,6 +41,13 @@
                     </ul>
                 </li>
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动管理 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{route('activity.index')}}">活动列表</a></li>
+                        <li><a href="{{route('activity.create')}}">添加列表</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">123 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href=""></a></li>

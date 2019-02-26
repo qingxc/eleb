@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,10 +30,12 @@ class LoginController extends Controller
             [
                 'name' => 'required',
                 'password' => 'required',
+                //'statues' =>0
             ],
             [
                 'name.required' => '用户名不能为空',
                 'password.required' => '密码不能为空',
+                //'statues.0'=>'用户未审核'
             ]
         );
 //        $admin = Admins::find(9);
@@ -58,4 +61,23 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->route('login')->with('success','退出登录成功');
     }
+
+    public function show()
+    {
+        $date= date('Y-m-d H:i:s');
+
+        $wheres=[];
+        $wheres[] = ['start_time','<=',$date];
+        $wheres[] = ['end_time','>=',$date];
+        $activity = Activity::where($wheres)->get();
+        return view('login.shows',compact('activity'));
+    }
+
+    public function shows(Activity $activity)
+    {
+        //dd($request);
+        return view('login.show',compact('activity'));
+    }
+
+
 }

@@ -29,20 +29,30 @@ class UsersController extends Controller
      */
     public function create(Users $user,Request $request)
     {
-        //
-        $cz = mt_rand(1,999999).'cz';
+        //var_dump($user->name) ;exit;
+        //dd($user->name);
+        //$cz = mt_rand(1,999999).'cz';
         //验证通过，保存数据
+//        $users=new Users();
+//        $users->name = $user->name;
+//        //dd($request->psaaword);
+//        $cz = mt_rand(1,999999).'cz';
+//        $users->password = Hash::make($cz);
+//        $users->email = $user->email;
+//        $users->shop_id = $user->shop_id;
+//        $users->statues = 0;
+//        $users->save();
         $a=$user->update([
             'name'=>$user->name,
             'email'=>$user->email,
-            'password'=>Hash::make(mt_rand(1,999999).'cz'),
+            'password'=>Hash::make('123456cz'),
             'shop_id'=>$user->shop_id,
             'statues'=>0,
         ]);
         //dd($a->statues);
 
         //设置操作提示信息
-        $request->session()->flash('success',"用户密码重置成功,请记住新密码"."$cz");
+        $request->session()->flash('success',"用户密码重置成功,请记住新密码"."123456cz");
         return redirect()->route('users.index');
 
     }

@@ -22,10 +22,11 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">123 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜品分类 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
+                        <li><a href="{{route('menucategory.index')}}">分类列表</a></li>
+                        <li><a href="{{route('menucategory.create')}}">添加分类</a></li>
+                        <li><a href="{{route('menus.create')}}">添加菜品</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -35,15 +36,9 @@
                         <li><a href=""></a></li>
                     </ul>
                 </li>
-
             </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{route('login.show')}}">活动</a></li>
                 <li><a href="{{route('login')}}">登录</a></li>
                 <li><a href="{{route('logout')}}">注销</a></li>
                 <li class="dropdown">
@@ -57,6 +52,15 @@
                     </ul>
                 </li>
             </ul>
+            <form action="menus.index" class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" name="goods_name" class="form-control" placeholder="搜索">
+                    <input type="text" name="min" class="form-control" placeholder="最小值">>价格区间<
+                    <input type="text" name="max" class="form-control" placeholder="最大值">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

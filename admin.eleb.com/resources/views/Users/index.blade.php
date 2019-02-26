@@ -18,7 +18,7 @@
                 <td>{{ $user->statues?'显示':'隐藏' }}</td>
                 <td>{{ $user->shop_id }}</td>
                 <td><a href="{{ route('users.show',[$user]) }}" class="btn btn-info">查看</a>
-                    <a href="{{ route('users.edit',[$user]) }}" class="btn btn-warning">审核</a>
+                    <a href="{{ route('users.edit',[$user]) }}" class="btn btn-warning">审核修改</a>
                     <a href="{{ route('users.create',[$user]) }}" class="btn btn-warning">重置密码</a>
                     <form style="display: inline" method="post" action="{{ route('users.destroy',[$user]) }}">
                         {{ csrf_field() }}
