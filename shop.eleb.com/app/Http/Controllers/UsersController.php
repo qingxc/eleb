@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -17,7 +18,8 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         //
-        $users=Users::all();
+
+        $users=Users::all()->where('shop_id',Auth::user()->shop_id);
         return view('users.index',compact('users'));
     }
 

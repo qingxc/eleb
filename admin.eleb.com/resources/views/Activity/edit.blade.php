@@ -15,13 +15,12 @@
 
         <div class="form-group">
             <label for="exampleInputEmail1">活动开始时间</label>
-            <input type="datetime-local" name="start_time" class="form-control" value="{{
-            old('start_time')??$activity->start_time }}" id="exampleInputEmail1" placeholder="活动名称">
+            <input type="datetime-local" name="start_time" class="form-control" value="{{str_replace(' ','T',$activity->start_time) }}" id="exampleInputEmail1" placeholder="活动名称">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">活动结束时间</label>
             <input type="datetime-local" name="end_time" class="form-control" value="{{
-            old('end_time')??$activity->end_time }}" id="exampleInputEmail1" placeholder="活动名称">
+            old('end_time')??str_replace(' ','T',$activity->end_time) }}" id="exampleInputEmail1" placeholder="活动名称">
         </div>
         {{csrf_field()}}
         {{ method_field('patch') }}

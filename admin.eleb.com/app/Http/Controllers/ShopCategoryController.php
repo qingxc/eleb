@@ -44,28 +44,19 @@ class ShopCategoryController extends Controller
             'name'=>'required',
             'status'=>'required',
             //上传图片验证，最大2m ->2048kb
-            'img'=>'required|image|max:2048'
+
         ],[
             'name.required'=>'名字不能为空',
             'status.required'=>'状态不能为空',
-            'img.required'=>'请上传图片',
-            'img.image'=>'图片格式不正确',
-            'img.max'=>'图片大小不能超过100K',
-        ]);
-        //dd($request);
 
-        //back()->withInput()
-        //获取上传的文件，并保存到服务器
-        $img = $request->file('img');
-        //保存文件
-        $path = $img->store('public/shopcategory');
+        ]);
 
 
         //验证通过，保存数据
         ShopCategory::create([
             'name'=>$request->name,
             'status'=>$request->status,
-            'img'=>$path
+            'img'=>$request->shop_img
         ]);
         return redirect()->route('shopcategory.index')->with('success','分类添加成功');
     }
@@ -106,25 +97,19 @@ class ShopCategoryController extends Controller
         $this->validate($request,[
             'name'=>'required',
             'status'=>'required',
-            //上传图片验证，最大2m ->2048kb
-            'img'=>'required|image|max:2048'
+
         ],[
             'name.required'=>'名字不能为空',
             'status.required'=>'状态不能为空',
-            'img.required'=>'请上传图片',
-            'img.image'=>'图片格式不正确',
-            'img.max'=>'图片大小不能超过100K',
+
         ]);
 
-        $img = $request->file('img');
-        //保存文件
-        $path = $img->store('public/shopcategory');
 
         //验证通过，保存数据
         $shopcategory->update([
             'name'=>$request->name,
             'status'=>$request->status,
-            'img'=>$path
+            'img'=>$request->shop_img
         ]);
 
 

@@ -26,6 +26,8 @@ Route::resource('menus','menusController');
 ////平台活动资源路由
 //Route::resource('activity','ActivityController');
 
+//文件上传路由
+Route::post('/upload','MenusController@upload');
 
 //活动
 Route::get('/login.shows/{activity}','LoginController@shows')->name('login.shows');

@@ -27,10 +27,16 @@
             <label>名称:</label>
             <input type="text" name="shop_name" class="form-control" value="{{ old('shop_name')??$shop->shop_name }}">
         </div>
-        <div class="form-group">
-            <label>	店铺图片:</label>
-            <input type="file" name="shop_img" class="form-control-file" value="{{ old('shop_img') }}">
+
+        <div id="uploader-demo">
+            <!--用来存放item-->
+            <label>图片上传:</label>
+            <div id="fileList" class="uploader-list"></div>
+            <div id="filePicker" >选择图片</div>
+            <img src="" id="img1" style="width: 80px"/>
+            <input name="shop_img" type="hidden" value="" id="img_path"/>
         </div>
+
         <div class="form-group">
             <label>评分:</label>
             <input type="text" name="shop_rating" class="form-control" value="{{ old('shop_rating')??$shop->shop_rating }}">

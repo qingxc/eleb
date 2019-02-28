@@ -8,6 +8,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ShopsController extends Controller
 {
@@ -55,7 +56,6 @@ class ShopsController extends Controller
         //商家信息
             'shop_category_id'=>'required',
             'shop_name'=>'required',
-            'shop_img'=>'required|image|max:2048',
             'brand'=>'required',
             'on_time'=>'required',
             'fengniao'=>'required',
@@ -81,9 +81,6 @@ class ShopsController extends Controller
             //商家信息表
             'shop_category_id.required'=>'店铺分类ID不能为空',
             'shop_name.required'=>'名字不能为空',
-            'shop_img.required'=>'店铺图片不能为空',
-            'shop_img.image'=>'图片格式不正确',
-            'shop_img.max'=>'图片大小不能超过100K',
             'on_time.required'=>'名字不能为空',
             'brand.required'=>'名字不能为空',
             'fengniao.required'=>'名字不能为空',
@@ -93,17 +90,6 @@ class ShopsController extends Controller
             'discount.required'=>'优惠信息不能为空',
 
         ]);
-        //dd($request);
-
-        //back()->withInput()
-        //获取上传的文件，并保存到服务器
-        $img = $request->file('shop_img');
-        //保存文件
-        $path = $img->store('public/shops');
-        //dd($path);
-
-
-
 
         DB::beginTransaction();
         //验证通过，保存商家信息
@@ -111,7 +97,7 @@ class ShopsController extends Controller
             //
             'shop_category_id'=>$request->shop_category_id,
             'shop_name'=>$request->shop_name,
-            'shop_img'=>$path,
+            'shop_img'=>$request->shop_img,
             'brand'=>$request->brand,
             'on_time'=>$request->on_time,
             'fengniao'=>$request->fengniao,
@@ -190,7 +176,6 @@ class ShopsController extends Controller
             //商家信息
             'shop_category_id'=>'required',
             'shop_name'=>'required',
-            'shop_img'=>'required|image|max:2048',
             'brand'=>'required',
             'on_time'=>'required',
             'fengniao'=>'required',
@@ -204,9 +189,6 @@ class ShopsController extends Controller
         ],[
             'shop_category_id.required'=>'店铺分类ID不能为空',
             'shop_name.required'=>'名字不能为空',
-            'shop_img.required'=>'店铺图片不能为空',
-            'shop_img.image'=>'图片格式不正确',
-            'shop_img.max'=>'图片大小不能超过100K',
             'on_time.required'=>'名字不能为空',
             'brand.required'=>'名字不能为空',
             'fengniao.required'=>'名字不能为空',
@@ -217,16 +199,12 @@ class ShopsController extends Controller
         ]);
 
 
-        $img = $request->file('shop_img');
-        //保存文件
-        $path = $img->store('public/shops');
-
 
         //验证通过，保存数据
         $shop->update([
             'shop_category_id'=>$request->shop_category_id,
             'shop_name'=>$request->shop_name,
-            'shop_img'=>$path,
+            'shop_img'=>$request->shop_img,
             'brand'=>$request->brand,
             'on_time'=>$request->on_time,
             'fengniao'=>$request->fengniao,
@@ -245,7 +223,7 @@ class ShopsController extends Controller
 
         //设置操作提示信息
         $request->session()->flash('success','用户审核成功');
-        return redirect()->route('users.index');
+        return redirect()->route('shops.index');
 
     }
 
@@ -262,5 +240,10 @@ class ShopsController extends Controller
         $shop->delete();
         session()->flash('success','信息删除成功');
         return redirect()->route('shops.index');
+    }
+
+    public function upload(Request $request)
+    {
+        return ['path'=>url(Storage::url($request->file('file')->store('public/shops')))];
     }
 }

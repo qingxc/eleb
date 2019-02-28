@@ -34,6 +34,9 @@ Route::get('/login','LoginController@index')->name('login');
 Route::post('/login','LoginController@login')->name('login');
 Route::get('/logout','LoginController@logout')->name('logout');
 
+//上传图片
+Route::post('/upload','ShopsController@upload');
+
 
 
 

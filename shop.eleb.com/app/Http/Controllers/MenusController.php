@@ -221,4 +221,12 @@ class MenusController extends Controller
         return redirect()->route('menu.index')->with('success',$str);
 
     }
+
+//在控制器添加路由
+    public function upload(Request $request)
+    {
+        return ['path'=>url(Storage::url($request->file('file')->store('public/menus')))];
+    }
+
+
 }

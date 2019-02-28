@@ -12,9 +12,13 @@
             <input type="text" name="status" class="form-control" value="{{
             old('age')??$shopcategory->status }}" id="exampleInputEmail1" placeholder="管理员密码">
         </div>
-        <div class="form-group">
-            <label>头像上传</label>
-            <input type="file" name="img">
+        <div id="uploader-demo">
+            <!--用来存放item-->
+            <label>图片上传:</label>
+            <div id="fileList" class="uploader-list"></div>
+            <div id="filePicker" >选择图片</div>
+            <img src="" id="img1" style="width: 80px"/>
+            <input name="shop_img" type="hidden" value="" id="img_path"/>
         </div>
         {{csrf_field()}}
         {{ method_field('patch') }}

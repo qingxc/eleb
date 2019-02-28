@@ -22,7 +22,8 @@ class MenuCategoryController extends Controller
         //$shop=Shops::all();
         //MenuCategory::all();
 //        $menucategory=DB::select('select * from menu_categories where shop_id=?',[Auth::user()->id]);
-        $menucategory=MenuCategory::all()->where('shop_id',Auth::user()->id);
+
+        $menucategory=MenuCategory::all();
 //        dd($menucategory[0]->id);
         return view('menucategory.index',compact('menucategory'));
     }
@@ -67,7 +68,7 @@ class MenuCategoryController extends Controller
         //var_dump(Auth::user()->id);exit;
         if($request->is_selected==1){
             $a=$request->shop_id;
-            DB::update('update menu_categories set is_selected=0 where is_selected=1 and shop_id=?',[Auth::user()->id]);
+            DB::update('update menu_categories set is_selected=0 where is_selected=1 and shop_id=?',[Auth::user()->shop_id]);
         }
         $menucategory = new MenuCategory();
         $menucategory->name = $request->name;

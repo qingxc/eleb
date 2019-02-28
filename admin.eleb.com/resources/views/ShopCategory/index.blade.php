@@ -9,11 +9,12 @@
             <th>状态</th>
             <th>操作</th>
         </tr>
+{{--        {{ dd($shopcategory) }}--}}
         @foreach($shopcategory as $shopcategor)
             <tr>
                 <td>{{ $shopcategor->id }}</td>
                 <td>{{ $shopcategor->name }}</td>
-                <td><img src="{{ $shopcategor->image() }}" style=" height: 80px"></td>
+                <td><img src="{{$shopcategor->img}}" style=" height: 80px"></td>
                 <td>{{ $shopcategor->status?'显示':'隐藏' }}</td>
                 <td><a href="{{ route('shopcategory.show',[$shopcategor]) }}" class="btn btn-info">查看</a>
                     <a href="{{ route('shopcategory.edit',[$shopcategor]) }}" class="btn btn-warning">编辑</a>

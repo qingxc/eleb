@@ -12,24 +12,23 @@
             <th>操作</th>
         </tr>
 {{--        {{ $menucategory }}--}}
-        @foreach($menucategory as $menucategor)
-{{--            {{ $menucategor->id }}--}}
-            <tr>
-                <td>{{ $menucategor->id }}</td>
-                <td>{{ $menucategor->name }}</td>
-                <td>{{ $menucategor->type_accumulation }}</td>
-                <td>{{ $menucategor->shop_id }}</td>
-                <td>{{ $menucategor->description }}</td>
-                <td>{{ $menucategor->is_selected==1?'默认':'否' }}</td>
-                <td><a href="{{ route('menus.index',['id'=>$menucategor->id]) }}" class="btn btn-info">查看菜品</a>
-                    <a href="{{ route('menucategory.edit',[$menucategor]) }}" class="btn btn-warning">编辑</a>
-                    <form style="display: inline" method="post" action="{{ route('menucategory.destroy',[$menucategor]) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('delete') }}
-                        <button type="submit" class="btn btn-danger">删除</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
+        {{--@foreach($menucategory as $menucategor)--}}
+            {{--<tr>--}}
+                {{--<td>{{ $menucategor->id }}</td>--}}
+                {{--<td>{{ $menucategor->name }}</td>--}}
+                {{--<td>{{ $menucategor->type_accumulation }}</td>--}}
+                {{--<td>{{ $menucategor->shop_id }}</td>--}}
+                {{--<td>{{ $menucategor->description }}</td>--}}
+                {{--<td>{{ $menucategor->is_selected==1?'默认':'否' }}</td>--}}
+                {{--<td><a href="{{ route('menus.index',['id'=>$menucategor->id]) }}" class="btn btn-info">查看菜品</a>--}}
+                    {{--<a href="{{ route('menucategory.edit',[$menucategor]) }}" class="btn btn-warning">编辑</a>--}}
+                    {{--<form style="display: inline" method="post" action="{{ route('menucategory.destroy',[$menucategor]) }}">--}}
+                        {{--{{ csrf_field() }}--}}
+                        {{--{{ method_field('delete') }}--}}
+                        {{--<button type="submit" class="btn btn-danger">删除</button>--}}
+                    {{--</form>--}}
+                {{--</td>--}}
+            {{--</tr>--}}
+        {{--@endforeach--}}
     </table>
 @stop

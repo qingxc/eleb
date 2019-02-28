@@ -34,9 +34,12 @@
             <label>提示信息</label>
             <input type="text" name="tips" class="form-control" value="{{ old('tips') }}">
         </div>
-        <div class="form-group">
-            <label>商品图片</label>
-            <input type="file" name="goods_img"  value="{{ old('goods_img') }}">
+        <div id="uploader-demo">
+            <!--用来存放item-->
+            <label>图片上传:</label>
+            <div id="fileList" class="uploader-list"></div>
+            <div id="filePicker" >选择图片</div>
+            <img src="" id="img1" style="width: 80px"/>
         </div>
         <div class="form-group">
             <label>状态</label>
