@@ -17,11 +17,10 @@ class MenusController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        //var_dump($request->id);exit;
-        //echo 123;exit;
-        $rows = Menus::where('shop_id',Auth::user()->shop_id)
-            ->where('category_id',$request->id);
+        //Auth::user()->id  = 5
+//        dd($request->id);
+//        dd(Auth::user()->id);
+        $rows = Menus::all();
 
         //如果有名称查询
         if($keyword = $request->keyword){
@@ -36,7 +35,7 @@ class MenusController extends Controller
             $rows->where('goods_price','<=',$max);
         }
         //最后查询
-        $rows = $rows->paginate(1);
+//        $rows = $rows->paginate(1);
         //菜品分类列表
         return view('Menus.index',compact('rows','request'));
 
@@ -71,14 +70,10 @@ class MenusController extends Controller
                 'rating' => 'required|numeric',//评分
                 'goods_price' => 'required|numeric',//价格
                 'tips' => 'required',//提示信息
-                'goods_img' => 'required|image|max:2048',//图片
                 'description' => 'required',//描述
             ],
             [
                 'goods_name.required' => '菜品名称不能为空',
-                'goods_img.required' => '图片不能为空',
-                'goods_img.image' => '请上传图片格式的文件',
-                'goods_img.max' => '请上传图片大小超过2M',
                 'rating.required' => '评分不能为空',
                 'rating.numeric' => '评分只能为数字',
                 'goods_price.required' => '菜品价格不能为空',
@@ -88,7 +83,7 @@ class MenusController extends Controller
             ]);
         $img = $request->file('goods_img');
 //        //保存文件
-        $path = $img->store('public/menus');
+        //$path = $img->store('public/menus');
         //$path = Storage::url($request->file('goods_img')->store('public/MenuImages'));//上传图片
 
         //验证通过
@@ -104,7 +99,7 @@ class MenusController extends Controller
             'tips' => $request->tips,
             'satisfy_count' => 0,
             'satisfy_rate' => 0,
-            'goods_img' => $path,
+            'goods_img' => $img,
             'status' => $request->status,
         ]);
 

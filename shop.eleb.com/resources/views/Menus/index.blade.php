@@ -20,10 +20,7 @@
 
             <th>操作</th>
         </tr>
-{{--        {{ $request }}--}}
-        {{ $rows }}
         @foreach($rows as $row)
-{{--            {{ $row->name }}--}}
             <tr>
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->goods_name }}</td>
@@ -37,7 +34,7 @@
                 <td>{{ $row->tips }}</td>
                 <td>{{ $row->satisfy_count }}</td>
                 <td>{{ $row->satisfy_rate }}</td>
-                <td><img src="{{ $row->image() }}" style=" height: 80px"></td>
+                <td><img src="{{ $row->good_img }}" style=" height: 80px"></td>
                 <td>{{ $row->status==1?'默认':'否' }}</td>
                 <td>
                     <a href="{{ route('menus.index',['id'=>$row->id]) }}" class="btn btn-info">查看</a>

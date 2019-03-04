@@ -23,8 +23,8 @@ class MenuCategoryController extends Controller
         //MenuCategory::all();
 //        $menucategory=DB::select('select * from menu_categories where shop_id=?',[Auth::user()->id]);
 
-        $menucategory=MenuCategory::all();
-//        dd($menucategory[0]->id);
+        $menucategory=MenuCategory::where('shop_id',Auth::user()->id)->get();
+//        dd($menucategory);
         return view('menucategory.index',compact('menucategory'));
     }
 
