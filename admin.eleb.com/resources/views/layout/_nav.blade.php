@@ -48,17 +48,10 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">123 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">会员管理<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">123 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
+                        <li><a href="{{route('members.index')}}">会员列表</a></li>
+                        <li><a href="{{route('members.create')}}">添加会员</a></li>
                     </ul>
                 </li>
 

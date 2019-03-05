@@ -19,6 +19,7 @@ class CreateMembersTable extends Migration
             $table->string('password');     //	密码
             $table->string('tel');          //	电话号码
             $table->rememberToken();           // token
+            $table->integer('status');          //状态
             $table->engine='InnoDB';        //数据库引擎
             $table->timestamps();
         });

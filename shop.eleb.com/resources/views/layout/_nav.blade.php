@@ -20,48 +20,35 @@
                         <li><a href="{{route('users.index')}}">商家列表</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商家管理  <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('shops.index')}}">商家列表</a></li>
-                        <li><a href="{{route('shops.create')}}">商家注册</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{route('shopcategory.index')}}">分类列表</a></li>
-                        <li><a href="{{route('shopcategory.create')}}">添加分类</a></li>
-                    </ul>
-                </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理员管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{route('admins.index')}}">管理列表</a></li>
-                        <li><a href="{{route('admins.create')}}">注册管理员</a></li>
+                        <li><a href="{{route('users.index')}}">管理列表</a></li>
+                        <li><a href="{{route('users.create')}}">注册管理员</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href=""></a></li>
                         <li><a href=""></a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动管理 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜品管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{route('activity.index')}}">活动列表</a></li>
-                        <li><a href="{{route('activity.create')}}">添加列表</a></li>
+                        <li><a href="{{route('menucategory.index')}}">活动列表</a></li>
+                        <li><a href="{{route('menucategory.create')}}">添加列表</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">123 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单管理<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href=""></a></li>
+                        <li><a href="{{route('tongji.index')}}">订单列表</a></li>
+                        <li><a href="{{route('tongji.tongjiz')}}">周订单量统计</a></li>
+                        <li><a href="{{route('tongji.tongjiy')}}">月订单量统计</a></li>
+                        <li><a href="{{route('tongji.tongjizc')}}">菜品周订单量统计</a></li>
+                        <li><a href="{{route('tongji.tongjiyc')}}">菜品月订单量统计</a></li>
                         <li><a href=""></a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">123 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                </li>
-
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
