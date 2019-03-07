@@ -32,6 +32,12 @@ Route::resource('activity','ActivityController');
 //平台会员管理路由
 Route::resource('members','MembersController');
 
+//RBAC角色管理路由
+Route::resource('rbacjs','RbacJsController');
+
+//RBAC权限管理路由
+Route::resource('permission','PermissionController');
+
 //定义登录路由
 Route::get('/login','LoginController@index')->name('login');
 Route::post('/login','LoginController@login')->name('login');

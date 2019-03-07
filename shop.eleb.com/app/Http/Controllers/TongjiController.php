@@ -76,104 +76,87 @@ class TongjiController extends Controller
     }
 
     //按周统计订菜品单量
-    public function ngjizc(Request $request){
-        //获取商家菜品信息
-       $data = Menus::select('goods_name')->where('shop_id',Auth::user()->id)->get();
-
-        //时间数组
-        $data1[]='';
-        //菜品名称数组
-        $data2[]='';
-        //循环遍历出菜品名字
-        foreach ($data as $d){
-            //将名字存入数组
-             $data2[] = $d->goods_name;
-            //菜品数量
-            $number=0;
-            $numbers[]='';
-            for($n=0;$n>=-6;$n--) {
-                //时间设置
-                $day = date("Y-m-d", strtotime("$n day"));
-                //查询出一周内每个菜品的次数
-                $nob = OrderDetails::select('amount')->where('goods_name',"$d->goods_name")->where('created_at', 'like',"%$day%")->get();
-                dd($nob);
-                foreach ($nob as $no){
-
-                    $number += $no->amount;
-                    $numbers[] = $number;
-                    $data1[] = $day;
-                }
-
-
-            }
-            dd($numbers);
-        }
-        dd($data2);
-        return view('tongji.tongjiz',compact('data1','data2','numbers'));//data1是xxxxxx data2 是菜品名字 numbers是数量
-    }
-
-
     public function tongjizc(Request $request){
-
-        //时间
-        $data1[]=0;
-        //数量集合
-        $data2[]=0;
-        //菜名
-        $data3[]=0;
-        for($n=0;$n>=-6;$n--){
-            $day=date("Y-m-d",strtotime("$n day"));
-//            $order=DB::select("select goods_name from order_details group by goods_name");
-//            $sql=11;
-            $sql="select goods_name,sum(amount) as am from order_details  where created_at like '$day%' group by goods_name";
-            $order = DB::select("$sql");
-
-//            var_dump($order);exit;
-            foreach ($order as $k =>$v){
-                $data22[]=$v->am;
-                $data33[]=$v->goods_name;
+        $menuWeek = [];
+        $data = [];
+        for($i=0;$i<=6;$i++){
+            $date = date('Y-m-d',strtotime("-$i day"));
+            $menuWeek[$date] = DB::select('select goods_id,sum(amount) as num from order_details join menuses on order_details.goods_id = menuses.id where menuses.shop_id = ? and order_details.created_at like ? GROUP BY goods_id ',[Auth::user()->id,"$date%"]);
+            foreach ($menuWeek[$date] as $row){
+                $row->goods_name = Menus::select('goods_name')->find($row->goods_id)->toArray()['goods_name'];
+                unset($row->goods_id);
             }
-//            foreach ($data33 as $k=>$v){
-//                if($v!=$ta){
-//                    $ta[]=$v;
-//                }
-//            }
-            $data1[]=$day;
-            $data2[]=$data22;
-            $data3[]=$data33;
         }
-        array_shift($data1);
-        array_shift($data2);
-        array_shift($data3);
-        $data1 = array_flip($data1);
-        foreach($data1 as &$row){
-            foreach ($data3 as $da=>&$d){
-                $val=array_values($d);
-                $row=array_flip($val);
-                $i=0;
-                foreach ($val as &$v){
-                    if($data2[$i]){
-                        $v = $data2[$i];
-                    }else{
-                        $v = '0';
+        $str = [];
+        foreach($menuWeek as $menu){
+            foreach($menu as $m){
+                $str[] = $m->goods_name;
+            }
+        }
+        foreach ($str as $row){
+            $data[$row] = array_keys($menuWeek);
+            $data[$row] = array_flip($data[$row]);
+        }
+        foreach($data as $rowK => &$rowV){
+            foreach($rowV as $k => &$v){
+                foreach($menuWeek[$k] as $m){
+                    if($m->goods_name == $rowK){
+                        $v = $m->num;
                     }
-
                 }
-                $i++;
             }
         }
-//        foreach ($data1 as $vv){
-//
-//        }
-//        dd($data1);
-        return view('tongji.tongjizc',compact('data1'));
-
+        foreach($data as &$row){
+            foreach($row as &$r){
+                if(gettype($r) == 'integer'){
+                    $r = '0';
+                }
+            }
+        }
+//        dd($data);
+        return view('tongji.tongjizc',compact('data'));
     }
 
 
     //按月统计订菜品单量
     public function tongjiyc(Request $request){
-
+        $menuWeek = [];
+        $data = [];
+        for($i=0;$i<=2;$i++){
+            $date = date('Y-m',strtotime("-$i month"));
+            $menuWeek[$date] = DB::select('select goods_id,sum(amount) as num from order_details join menuses on order_details.goods_id = menuses.id where menuses.shop_id = ? and order_details.created_at like ? GROUP BY goods_id ',[Auth::user()->id,"$date%"]);
+            foreach ($menuWeek[$date] as $row){
+                $row->goods_name = Menus::select('goods_name')->find($row->goods_id)->toArray()['goods_name'];
+                unset($row->goods_id);
+            }
+        }
+        $str = [];
+        foreach($menuWeek as $menu){
+            foreach($menu as $m){
+                $str[] = $m->goods_name;
+            }
+        }
+        foreach ($str as $row){
+            $data[$row] = array_keys($menuWeek);
+            $data[$row] = array_flip($data[$row]);
+        }
+        foreach($data as $rowK => &$rowV){
+            foreach($rowV as $k => &$v){
+                foreach($menuWeek[$k] as $m){
+                    if($m->goods_name == $rowK){
+                        $v = $m->num;
+                    }
+                }
+            }
+        }
+        foreach($data as &$row){
+            foreach($row as &$r){
+                if(gettype($r) == 'integer'){
+                    $r = '0';
+                }
+            }
+        }
+        return view('tongji.tongjiyc',compact('data'));
     }
 
 

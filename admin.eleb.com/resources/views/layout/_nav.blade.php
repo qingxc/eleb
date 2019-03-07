@@ -66,13 +66,13 @@
                 <li><a href="{{route('login')}}">登录</a></li>
                 <li><a href="{{route('logout')}}">注销</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RBAC <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="{{route('rbacjs.index')}}">角色列表</a></li>
+                        <li><a href="{{route('rbacjs.create')}}">添加角色</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="{{route('permission.index')}}">权限列表</a></li>
+                        <li><a href="{{route('permission.create')}}">添加权限</a></li>
                     </ul>
                 </li>
             </ul>

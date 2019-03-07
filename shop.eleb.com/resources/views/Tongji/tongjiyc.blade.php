@@ -8,8 +8,6 @@
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-
-        // 指定图表的配置项和数据
         var option = {
             tooltip: {
                 trigger: 'axis'
@@ -33,7 +31,7 @@
                 boundaryGap: false,
                 data: @foreach($data as $row)
                 {!! json_encode(array_keys($row)) !!}
-                    @break
+                @break
                 @endforeach
             },
             yAxis: {

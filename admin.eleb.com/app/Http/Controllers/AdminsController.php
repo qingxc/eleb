@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Admins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AdminsController extends Controller
 {
@@ -29,7 +30,8 @@ class AdminsController extends Controller
     public function create()
     {
         //
-        return view('admins.create');
+        $rows=Role::all();
+        return view('admins.create',compact('rows'));
     }
 
     /**
@@ -50,24 +52,13 @@ class AdminsController extends Controller
             'password.required'=>'内容不能为空',
             'email'=>'邮箱不能为空',
         ]);
-
-
-        //验证通过，保存数据
-        //var_dump($request->password);
-
-//        $admin = new Admins();
-//        $admin->name = $request->name;
-//        //dd($request->psaaword);
-//        $admin->password = Hash::make($request->password);
-//
-//        $admin->email = $request->email;
-//        $admin->save();
-        //dd('ok');
-        Admins::create([
+        $admins=Admins::create([
             'name'=>$request->name,
             'password'=>Hash::make($request->psaaword),
             'email'=>$request->email,
         ]);
+        //添加管理员角色
+        $admins->syncRoles($request->permission);
         return redirect()->route('admins.index')->with('success','管理员添加成功');
     }
 
@@ -91,8 +82,9 @@ class AdminsController extends Controller
      */
     public function edit(Admins $admin)
     {
-        //
-        return view('admins.edit',compact('gclasses','admin'));
+        $rows=Role::all();
+        $roles=$admin->getRoleNames();
+        return view('admins.edit',compact('rows','admin','roles'));
     }
 
     /**
