@@ -6,6 +6,8 @@ use App\Models\ShopCategory;
 use App\Models\Shops;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -219,20 +221,18 @@ class ShopsController extends Controller
             'name'=>$request->name,
             'status'=>$request->status
         ]);
+        //审核通过发送邮件
+//            $id=Shops::select('id')->where('id',Auth::user()->id)->get();
+//        Users::select('email')->where('shop_id',$id->id)->get();
 
-
+//        redirect()->route('mail');
         //设置操作提示信息
         $request->session()->flash('success','用户审核成功');
         return redirect()->route('shops.index');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Shops $shop)
     {
         //

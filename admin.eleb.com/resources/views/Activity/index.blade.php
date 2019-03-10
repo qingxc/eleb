@@ -29,13 +29,20 @@
                 <td>{{ $activit->title }}</td>
                 <td>{{ $activit->start_time }}</td>
                 <td>{{ $activit->end_time }}</td>
-                <td><a href="{{ route('activity.show',[$activit]) }}" class="btn btn-info">查看</a>
+                <td>
+                    @can('查看活动')
+                    <a href="{{ route('activity.show',[$activit]) }}" class="btn btn-info">查看</a>
+                    @endcan
+                    @can('修改活动')
                     <a href="{{ route('activity.edit',[$activit]) }}" class="btn btn-warning">编辑</a>
+                    @endcan
+                    @can('删除活动')
                     <form style="display: inline" method="post" action="{{ route('activity.destroy',[$activit]) }}">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
                         <button type="submit" class="btn btn-danger">删除</button>
                     </form>
+                    @endcan
                 </td>
             </tr>
         @endforeach

@@ -15,7 +15,7 @@ class PermissionController extends Controller
     public function index()
     {
         //
-        $rows = Permission::all();
+        $rows = Permission::paginate(9);
         return view('permission.index',compact('rows'));
     }
 

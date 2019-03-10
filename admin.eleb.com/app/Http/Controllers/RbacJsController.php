@@ -84,7 +84,7 @@ class RbacJsController extends Controller
 
         //赋予权限
         if($request->role){
-            $rbacj->givePermissionTo($request->role);
+            $rbacj->syncPermissions($request->role);
         }
 
         return redirect()->route('rbacjs.index')->with('success','更新角色成功');

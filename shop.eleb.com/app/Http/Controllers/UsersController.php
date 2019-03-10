@@ -19,7 +19,7 @@ class UsersController extends Controller
     {
         //
 
-        $users=Users::all()->where('shop_id',Auth::user()->shop_id);
+        $users=Users::all();
         return view('users.index',compact('users'));
     }
 
@@ -55,11 +55,11 @@ class UsersController extends Controller
 
 
         //验证通过，保存数据
-        //var_dump($request->password);
+//        var_dump($request->password);
 
         $user = new Users();
         $user->name = $request->name;
-        //dd($request->psaaword);
+//        dd($request->password);
         $user->password = Hash::make($request->password);
         $user->statues=0;
         $user->email = $request->email;
@@ -123,7 +123,7 @@ class UsersController extends Controller
             //验证通过，保存数据
             $user->update([
                 'name'=>$request->name,
-                'password'=>Hash::make($request->psaaword),
+                'password'=>Hash::make($request->password),
                 'email'=>$request->email,
             ]);
             //设置操作提示信息

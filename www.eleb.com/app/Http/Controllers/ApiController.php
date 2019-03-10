@@ -439,8 +439,8 @@ class ApiController extends Controller
             return ['status' => 'false','message' => '添加失败','order_id' => 0];
         }
 
-
-
+        //订单生成成功发送短信
+        $this->tips($sn);
     }
 
     //获取指定订单数据接口
@@ -530,6 +530,52 @@ class ApiController extends Controller
         return $data;
 
     }
+
+    public function tips($sn){
+        $sn = substr($sn,8,4);
+
+        // 短信应用SDK AppID
+        $appid = 1400189795; // 1400开头
+
+        // 短信应用SDK AppKey
+        $appkey = "f0f379ddda7c39e41088a3881b20cb35";
+
+        // 需要发送短信的手机号码
+        $phoneNumber = Auth::user()->tel;
+
+        // 短信模板ID，需要在短信应用中申请
+        $templateId = 290426;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+
+        $smsSign = "firstyun"; // NOTE: 这里的签名只是示例，请使用真实的已申请的签名，签名参数使用的是`签名内容`，而不是`签名ID`
+
+        try {
+            $ssender = new SmsSingleSender($appid, $appkey);
+            $params = ['***'.$sn.'***'];//编号订单
+
+            //发送短信
+            $result = $ssender->sendWithParam(
+                "86",
+                $phoneNumber,
+                $templateId,
+                $params,
+                $smsSign,
+                "",
+                ""
+            );  // 签名参数未提供或者为空时，会使用默认签名发送短信
+
+            $rsp = json_decode($result);
+            dd($rsp);
+            return $rsp;
+
+        } catch(\Exception $e) {
+            echo var_dump($e);
+            //获取验证码失败
+            return ['status'=>'false','message' => '获取验证码失败'];
+        }
+        //获取验证码成功
+        return ['status'=>'true','message' => '获取验证码成功'];
+    }
+
 }
 
 

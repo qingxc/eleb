@@ -24,4 +24,7 @@
             </tr>
         @endforeach
     </table>
+    <div>
+        {{ $rows->links() }}
+    </div>
 @stop

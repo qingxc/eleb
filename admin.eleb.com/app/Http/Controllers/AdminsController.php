@@ -83,7 +83,6 @@ class AdminsController extends Controller
     public function edit(Admins $admin)
     {
         $rows=Role::all();
-        $roles=$admin->getRoleNames();
         return view('admins.edit',compact('rows','admin','roles'));
     }
 
@@ -144,4 +143,19 @@ class AdminsController extends Controller
         session()->flash('success','管理员删除成功');
         return redirect()->route('admins.index');
     }
+
+
+    //修改管理员角色
+    public function adminjs(Admins $admin){
+        $rows=Role::all();
+        return view('admins.adminsjs',compact('rows','admin'));
+    }
+
+    public function adminjsg(Admins $admin,Request $request){
+        $admins=Admins::all();
+        $admin->syncRoles($request->role);
+        session()->flash('success','管理员角色添加成功');
+        return view('admins.index',compact('admins'));
+    }
+
 }

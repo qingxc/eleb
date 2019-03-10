@@ -6,11 +6,11 @@
     <form method="post" action="{{ route('users.store') }}" enctype="multipart/form-data">
         <div class="form-group">
             <label>用户名</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+            <input type="text" name="name" class="form-control">
         </div>
         <div class="form-group">
             <label>密码</label>
-            <input type="password" name="password" class="form-control" value="{{ old('password') }}">
+            <input type="password" name="password" class="form-control">
         </div>
         <div class="form-group">
             <label>邮箱</label>

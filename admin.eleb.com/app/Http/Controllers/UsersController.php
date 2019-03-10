@@ -125,7 +125,7 @@ class UsersController extends Controller
 
         //设置操作提示信息
         $request->session()->flash('success','用户审核成功');
-        return redirect()->route('users.index');
+        return redirect()->route('users');
 
     }
 

@@ -39,6 +39,14 @@
                     </ul>
                 </li>
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">抽奖活动<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{route('eventmembers.create')}}">报名抽奖</a></li>
+                        <li><a href="{{route('eventmembers.index')}}">报名列表</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单管理<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{route('tongji.index')}}">订单列表</a></li>
@@ -58,12 +66,12 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{route('login')}}">登录</a></li>
-                <li><a href="{{route('logout')}}">注销</a></li>
+
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
+                        <li><a href="{{route('login')}}">登录</a></li>
+                        <li><a href="{{route('logout')}}">注销</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Separated link</a></li>

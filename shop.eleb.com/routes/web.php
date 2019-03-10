@@ -60,3 +60,8 @@ Route::get('/tongji.tongjizc','TongjiController@tongjizc')->name('tongji.tongjiz
 
 //菜品销量统计按周统计
 Route::get('/tongji.tongjiyc','TongjiController@tongjiyc')->name('tongji.tongjiyc');
+
+
+
+//抽奖报名路由定义
+Route::resource('eventmembers','EventMembersController');

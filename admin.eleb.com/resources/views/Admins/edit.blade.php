@@ -22,20 +22,8 @@
             <input type="text" class="form-control" name="email" value="{{
             old('email')??$admin->email }}" placeholder="管理员邮箱">
         </div>
-        <div>
-            <p><label>角色:</label></p>
-            @foreach($rows as $row)
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox1" name="role[]" value="{{$row->name}}"
-                           @if($admin->hasRole($row->name))
-                           checked
-                            @endif
-                    >{{$row->name}}
-                </label>
-            @endforeach
-        </div>
         {{csrf_field()}}
         {{ method_field('patch') }}
-        <button type="submit" class="btn btn-default btn-primary">添加用户</button>
+        <button type="submit" class="btn btn-default btn-primary">修改用户</button>
     </form>
 @stop();
